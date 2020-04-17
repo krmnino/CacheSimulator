@@ -2,6 +2,7 @@
 #include <fstream>
 
 #include "direct-mapped.cpp"
+#include "set_associative.cpp"
 
 int main(int argc, char* argv[]) {
 	if(argc != 3){
@@ -10,4 +11,5 @@ int main(int argc, char* argv[]) {
 	}
 	std::ofstream out_file(argv[2]);
 	direct_mapped(out_file, argv[1]);
+	set_associative(out_file, argv[1]);
 }

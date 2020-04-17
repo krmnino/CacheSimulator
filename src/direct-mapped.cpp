@@ -4,7 +4,6 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <iostream>
 #include <math.h>
 
 void direct_mapped(std::ofstream &out_file, std::string file_name){
@@ -18,7 +17,7 @@ void direct_mapped(std::ofstream &out_file, std::string file_name){
 	int cache_size;
 	int set_index;
 	unsigned long long tag;
-	int sizes[] = {1024, 4096, 16384, 32768};
+	int sizes[] = {1024, 4096, 16384, 32768}; //cache sizes: 1KB, 4KB, 16KB, 32KB
     for(int i = 0; i < int(sizeof(sizes)/sizeof(sizes[0])); i++){
 		std::ifstream infile(file_name);
 		accesses = 0;
