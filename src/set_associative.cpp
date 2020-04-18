@@ -1,10 +1,9 @@
-#ifndef SA
-#define SA
-
 #include <fstream>
 #include <string>
 #include <vector>
 #include <math.h>
+
+#include "set_associative.h"
 
 #include <iostream>
 
@@ -25,5 +24,3 @@ void set_associative(std::ofstream &out_file, std::string file_name){
         //std::cout << cache.size() << " sets *" << cache[0].size() << "ways" << std::endl;
     }
 }
-
-#endif

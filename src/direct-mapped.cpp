@@ -1,10 +1,9 @@
-#ifndef DM
-#define DM
-
 #include <fstream>
 #include <string>
 #include <vector>
 #include <math.h>
+
+#include "direct-mapped.h"
 
 void direct_mapped(std::ofstream &out_file, std::string file_name){
     std::string op;
@@ -66,5 +65,3 @@ void direct_mapped(std::ofstream &out_file, std::string file_name){
 		infile.close();
 	}
 }
-
-#endif

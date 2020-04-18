@@ -1,8 +1,8 @@
 #include <iostream>
 #include <fstream>
 
-#include "direct-mapped.cpp"
-#include "set_associative.cpp"
+#include "direct-mapped.h"
+#include "set_associative.h"
 
 int main(int argc, char* argv[]) {
 	if(argc != 3){
