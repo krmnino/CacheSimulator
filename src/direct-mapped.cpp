@@ -24,7 +24,7 @@ void direct_mapped(std::ofstream &out_file, std::string file_name){
 		cache_size = sizes[i]/32;
 		std::vector<long long> cache;
 		cache.resize(cache_size);
-		set_index_bits = 5;
+		offset_bits = log2(32); //lg(cache_size) and cache_size = 32 bytes
 		switch(cache_size){
 			case 32:
 				extractor = 0x1F;
@@ -46,7 +46,6 @@ void direct_mapped(std::ofstream &out_file, std::string file_name){
 				break;
 		}
 		while (infile >> op >> std::hex >> addr) {
-			offset_bits = log2(32); //lg(cache_size) and cache_size = 32 bytes
 			addr = addr >> offset_bits;  //shift right address 5 bits
 			set_index = addr & extractor; //extract set index using corresponding extractor
 			tag = addr >> set_index_bits; //shift right address number of bits of set_index
