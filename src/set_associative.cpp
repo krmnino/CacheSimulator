@@ -5,8 +5,6 @@
 
 #include "set_associative.h"
 
-#include <iostream>
-
 void set_associative(std::ofstream &out_file, std::string file_name){
     std::string op;
 	unsigned long long addr;
@@ -60,25 +58,25 @@ void set_associative(std::ofstream &out_file, std::string file_name){
 			tag = addr >> set_index_bits;
 			bool found = false;
 			for (int j = 0; j < cache[set_index].size(); j++) {
-				if (tag == cache[set_index][j]) {
-					hits++;
-					for (lru_queue_index = 0; lru_queue_index < lru_queue[set_index].size(); lru_queue_index++) {
-						if (lru_queue[set_index][lru_queue_index] == j) {
-							lru_way = lru_queue[set_index][lru_queue_index];
+				if (tag == cache[set_index][j]) { //if there is a cache hit within set
+					hits++; //increase hit counter
+					for (lru_queue_index = 0; lru_queue_index < lru_queue[set_index].size(); lru_queue_index++) { //search lru_queue for set way used in cache, preserve set way index
+						if (lru_queue[set_index][lru_queue_index] == j) { //if set way is found
+							lru_way = lru_queue[set_index][lru_queue_index]; //set lru_way equal to the 
 							break;
 						}
 					}
-					lru_queue[set_index].erase(lru_queue[set_index].begin() + lru_queue_index);
-					lru_queue[set_index].insert(lru_queue[set_index].begin(), lru_way);
-					found = true;
-					break;
+					lru_queue[set_index].erase(lru_queue[set_index].begin() + lru_queue_index); //removed accessed set way from lru_queue
+					lru_queue[set_index].insert(lru_queue[set_index].begin(), lru_way); //insert set way back at the begining of the lru_queue
+					found = true; //set found flag true
+					break; //exit the loop
 				}
 			}
-			if (!found) {
-				lru_way = lru_queue[set_index][lru_queue[set_index].size() - 1];
-				cache[set_index][lru_way] = tag;
-				lru_queue[set_index].pop_back();
-				lru_queue[set_index].insert(lru_queue[set_index].begin(), lru_way);
+			if (!found) { //if found flag remains false
+				lru_way = lru_queue[set_index][lru_queue[set_index].size() - 1]; //get last element from lru_queue (lru element)
+				cache[set_index][lru_way] = tag; //set cache at set_index and lru_way with new memory address tag
+				lru_queue[set_index].pop_back(); //pop set way from lru_queue
+				lru_queue[set_index].insert(lru_queue[set_index].begin(), lru_way); //insert removed set way back to lru_queue
 			}
 			accesses++;
 		}
