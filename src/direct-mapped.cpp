@@ -3,7 +3,7 @@
 #include <vector>
 #include <math.h>
 
-#include "direct-mapped.h"
+#include "caches.h"
 
 void direct_mapped(std::ofstream &out_file, std::string file_name){
     std::string op;
@@ -11,7 +11,7 @@ void direct_mapped(std::ofstream &out_file, std::string file_name){
 	int hits;
 	int accesses;
 	int extractor;
-	int offset_bits;
+	int offset_bits = log2(32); //lg(cache_size) and cache_size = 32 bytes;
 	int set_index_bits;
 	int cache_size;
 	int set_index;
@@ -24,7 +24,6 @@ void direct_mapped(std::ofstream &out_file, std::string file_name){
 		cache_size = sizes[i]/32;
 		std::vector<long long> cache;
 		cache.resize(cache_size);
-		offset_bits = log2(32); //lg(cache_size) and cache_size = 32 bytes
 		switch(cache_size){
 			case 32:
 				extractor = 0x1F;

@@ -3,7 +3,7 @@
 #include <vector>
 #include <math.h>
 
-#include "set_associative.h"
+#include "caches.h"
 
 void set_associative(std::ofstream &out_file, std::string file_name){
     std::string op;
@@ -11,7 +11,7 @@ void set_associative(std::ofstream &out_file, std::string file_name){
 	int hits;
 	int accesses;
     int cache_size = 16384; //16KB, 32 bytes per line = 512 cache lines
-	int offset_bits;
+	int offset_bits = log2(32);
 	int extractor;
 	int set_index;
 	int set_index_bits;
@@ -24,14 +24,13 @@ void set_associative(std::ofstream &out_file, std::string file_name){
         cache.resize(cache_size/32/i, std::vector<unsigned long long>(i));
         std::vector<std::vector<int>> lru_queue; //keeps track of the cache lines per set, most recently used closer to index 0
         lru_queue.resize(cache_size/32/i, std::vector<int>(i));
-		int lru_way;
-		int lru_queue_index;
+		int lru_way; //holds cache line index from cache at a given set
+		int lru_queue_index; //holds index of lru_queue
 		for (int j = 0; j < lru_queue.size(); j++) {
 			for (int k = 0; k < lru_queue[i].size(); k++) {
 				lru_queue[j][k] = lru_queue[j].size() - k - 1;
 			}
 		}
-		offset_bits = log2(32);
 		switch (cache_size/32/i) {
 		case 32:
 			extractor = 0x1F;
