@@ -5,8 +5,6 @@
 
 #include "caches.h"
 
-#include <iostream>
-
 void fully_associative_hc(std::ofstream& out_file, std::string file_name) {
 	std::ifstream infile(file_name);
 	std::string op;
@@ -43,20 +41,19 @@ void fully_associative_hc(std::ofstream& out_file, std::string file_name) {
 				break;
 			}
 		}
-		if (!found) {
-			bin_tree_index = 0;
-			int curr_level = 0;
-			while (curr_level < log2(cache.size())) {
-				if (bin_tree_hc[bin_tree_index] == 0) {
-					bin_tree_hc[bin_tree_index] = 1;
-					bin_tree_index = 2 * bin_tree_index + 1;
-					curr_level++;
+		if (!found) { //If tag not found in cache (MISS)
+			bin_tree_index = 0;//set binary tree index to 0
+			int curr_level = 0; //set current level counter to 0 (root)
+			while (curr_level < log2(cache.size())) { //iterate until reach a trees's leaf
+				if (bin_tree_hc[bin_tree_index] == 0) { // if current node is 0
+					bin_tree_hc[bin_tree_index] = 1; //set it to 1
+					bin_tree_index = 2 * bin_tree_index + 1; //compute index to next node (left child)
 				}
 				else {
 					bin_tree_hc[bin_tree_index] = 0;
 					bin_tree_index = 2 * bin_tree_index + 2;
-					curr_level++;
 				}
+				curr_level++;
 			}
 			bin_tree_index = bin_tree_index - cache.size() + 1;
 			cache[bin_tree_index] = tag;

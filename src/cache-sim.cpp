@@ -12,5 +12,6 @@ int main(int argc, char* argv[]) {
 	//direct_mapped(out_file, argv[1]);
 	//set_associative(out_file, argv[1]);
 	//fully_associative_lru(out_file, argv[1]);
-	fully_associative_hc(out_file, argv[1]);
+	//fully_associative_hc(out_file, argv[1]);
+	set_associative_ns(out_file, argv[1]);
 }
