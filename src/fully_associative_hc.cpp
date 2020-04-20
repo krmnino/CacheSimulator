@@ -28,7 +28,7 @@ void fully_associative_hc(std::ofstream& out_file, std::string file_name) {
 		for (cache_index = 0; cache_index < cache.size(); cache_index++) {
 			if (tag == cache[cache_index]) { //if there is a cache hit 
 				hits++; //increase hit counter
-				bin_tree_index = cache_index + bin_tree_hc.size() - 1;
+				bin_tree_index = cache_index + cache.size() - 1;
 				while (bin_tree_index != 0) {
 					if (bin_tree_index % 2 == 0) {
 						bin_tree_index = (bin_tree_index - 2) / 2;
