@@ -12,21 +12,19 @@ void fully_associative_lru(std::ofstream& out_file, std::string file_name) {
 	std::string op;
 	unsigned long long addr;
 	int hits = 0;
-	int accesses = 0;;
-	int cache_size = 16384;
-	std::vector<unsigned long long> cache;
-	cache.resize(16384/32);
-	std::vector<int> lru_queue;
-	lru_queue.resize(16384/32);
+	int accesses = 0;
+	int total_cache_size = 16384;
 	int offset_bits = log2(32);
+	std::vector<unsigned long long> cache;
+	cache.resize(total_cache_size / 32);
+	std::vector<int> lru_queue;
+	lru_queue.resize(total_cache_size / 32);
 	unsigned long long tag;
 	int lru_way;
 	int lru_queue_index;
 	for (int i = 0; i < lru_queue.size(); i++) {
 		lru_queue[i] = lru_queue.size() - i - 1;
-	}
-	//std::cout << cache.size();
-	
+	}	
 	while (infile >> op >> std::hex >> addr) {
 		tag = addr >> offset_bits;
 		bool found = false;

@@ -11,5 +11,6 @@ int main(int argc, char* argv[]) {
 	std::ofstream out_file(argv[2]);
 	//direct_mapped(out_file, argv[1]);
 	//set_associative(out_file, argv[1]);
-	fully_associative_lru(out_file, argv[1]);
+	//fully_associative_lru(out_file, argv[1]);
+	fully_associative_hc(out_file, argv[1]);
 }
