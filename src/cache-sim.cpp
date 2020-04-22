@@ -13,5 +13,6 @@ int main(int argc, char* argv[]) {
 	//set_associative(out_file, argv[1]);
 	//fully_associative_lru(out_file, argv[1]);
 	//fully_associative_hc(out_file, argv[1]);
-	set_associative_ns(out_file, argv[1]);
+	//set_associative_ns(out_file, argv[1]);
+	set_associative_prefetch(out_file, argv[1]);
 }
