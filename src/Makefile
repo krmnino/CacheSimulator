@@ -1,12 +1,12 @@
 TARGET = cache-sim
 
-OBJS = cache-sim.o\
+OBJS = 	cache-sim.o 
 
 CXX = g++
 CXXFLAGS = -std=c++17
 
 $(TARGET):	$(OBJS)	
-		$(CXX) $(CXXFLAGS) cache-sim.o -g -o $(TARGET)
+		$(CXX) $(CXXFLAGS) $(OBJS) -g -o $(TARGET)
 
 clean:
 		rm -f *.o $(TARGET)
