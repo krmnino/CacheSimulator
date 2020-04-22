@@ -76,13 +76,12 @@ void set_associative_prefetch(std::ofstream& out_file, std::string file_name) {
 					}
 					lru_queue[set_index].erase(lru_queue[set_index].begin() + lru_queue_index); //removed accessed set way from lru_queue
 					lru_queue[set_index].insert(lru_queue[set_index].begin(), lru_way); //insert set way back at the begining of the lru_queue
-
 					addr += 0x20; //prefetch the next line in trace
-					tag_index = addr >> offset_bits;
+					tag_index = addr >> offset_bits; //perform the same bit shifting operations as previous line
 					set_index = tag_index & extractor;
 					tag = tag_index >> set_index_bits;
-					bool found_hit = false;
-					for (int k = 0; k < cache[set_index].size(); k++) {
+					bool found_hit = false; //set new found_hit flag for the new line
+					for (int k = 0; k < cache[set_index].size(); k++) { //not necessary to count hits
 						if (tag == cache[set_index][k]) { //if there is a cache hit within set
 							for (lru_queue_index = 0; lru_queue_index < lru_queue[set_index].size(); lru_queue_index++) { //search lru_queue for set way used in cache, preserve set way index
 								if (lru_queue[set_index][lru_queue_index] == k) { //if set way is found
@@ -96,13 +95,12 @@ void set_associative_prefetch(std::ofstream& out_file, std::string file_name) {
 							break; //exit the loop
 						}
 					}
-					if (!found_hit) {
+					if (!found_hit) { //if new prefetched line does not exist in cache
 						lru_way = lru_queue[set_index][lru_queue[set_index].size() - 1]; //get last element from lru_queue (lru element)
 						cache[set_index][lru_way] = tag; //set cache at set_index and lru_way with new memory address tag
 						lru_queue[set_index].pop_back(); //pop set way from lru_queue
 						lru_queue[set_index].insert(lru_queue[set_index].begin(), lru_way); //insert removed set way back to lru_queue
 					}
-
 					found = true; //set found flag true
 					break; //exit the loop
 				}
@@ -112,12 +110,12 @@ void set_associative_prefetch(std::ofstream& out_file, std::string file_name) {
 				cache[set_index][lru_way] = tag; //set cache at set_index and lru_way with new memory address tag
 				lru_queue[set_index].pop_back(); //pop set way from lru_queue
 				lru_queue[set_index].insert(lru_queue[set_index].begin(), lru_way); //insert removed set way back to lru_queue
-				addr += 0x20;
-				tag_index = addr >> offset_bits;
+				addr += 0x20; //prefetch the next line in trace
+				tag_index = addr >> offset_bits; //perform the same bit shifting operations as previous line
 				set_index = tag_index & extractor;
 				tag = tag_index >> set_index_bits;
-				bool found_miss = false;
-				for (int j = 0; j < cache[set_index].size(); j++) {
+				bool found_miss = false; //set new found_miss flag for the new line
+				for (int j = 0; j < cache[set_index].size(); j++) { //not necessary to count hits
 					if (tag == cache[set_index][j]) { //if there is a cache hit within set
 						for (lru_queue_index = 0; lru_queue_index < lru_queue[set_index].size(); lru_queue_index++) { //search lru_queue for set way used in cache, preserve set way index
 							if (lru_queue[set_index][lru_queue_index] == j) { //if set way is found
@@ -131,7 +129,7 @@ void set_associative_prefetch(std::ofstream& out_file, std::string file_name) {
 						break; //exit the loop
 					}
 				}
-				if (!found_miss) {
+				if (!found_miss) { //if new prefetched line does not exist in cache
 					lru_way = lru_queue[set_index][lru_queue[set_index].size() - 1]; //get last element from lru_queue (lru element)
 					cache[set_index][lru_way] = tag; //set cache at set_index and lru_way with new memory address tag
 					lru_queue[set_index].pop_back(); //pop set way from lru_queue

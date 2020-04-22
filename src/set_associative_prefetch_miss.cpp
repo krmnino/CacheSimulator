@@ -96,7 +96,7 @@ void set_associative_prefetch_miss(std::ofstream& out_file, std::string file_nam
 						break; //exit the loop
 					}
 				}
-				if (!found_miss) {
+				if (!found_miss) { //if new prefetched line does not exist in cache
 					lru_way = lru_queue[set_index][lru_queue[set_index].size() - 1]; //get last element from lru_queue (lru element)
 					cache[set_index][lru_way] = tag; //set cache at set_index and lru_way with new memory address tag
 					lru_queue[set_index].pop_back(); //pop set way from lru_queue
