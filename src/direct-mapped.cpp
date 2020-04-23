@@ -3,8 +3,6 @@
 #include <vector>
 #include <math.h>
 
-#include "caches.h"
-
 void direct_mapped(std::ofstream &out_file, std::string file_name){
     std::string op;
 	unsigned long long addr;
@@ -62,4 +60,5 @@ void direct_mapped(std::ofstream &out_file, std::string file_name){
 		}
 		infile.close();
 	}
+	out_file << std::endl;
 }

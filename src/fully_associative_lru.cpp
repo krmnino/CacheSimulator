@@ -3,10 +3,6 @@
 #include <vector>
 #include <math.h>
 
-#include "caches.h"
-
-#include <iostream>
-
 void fully_associative_lru(std::ofstream& out_file, std::string file_name) {
 	std::ifstream infile(file_name);
 	std::string op;
@@ -51,6 +47,6 @@ void fully_associative_lru(std::ofstream& out_file, std::string file_name) {
 		}
 		accesses++;
 	}
-	out_file << hits << "," << accesses << ";";
+	out_file << hits << "," << accesses << ";" << std::endl;
 	infile.close();
 }

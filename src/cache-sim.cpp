@@ -1,7 +1,13 @@
 #include <iostream>
 #include <fstream>
 
-#include "caches.h"
+#include "direct-mapped.cpp"
+#include "set_associative.cpp"
+#include "fully_associative_lru.cpp"
+#include "fully_associative_hc.cpp"
+#include "set_associative_ns.cpp"
+#include "set_associative_prefetch.cpp"
+#include "set_associative_prefetch_miss.cpp"
 
 int main(int argc, char* argv[]) {
 	if(argc != 3){
