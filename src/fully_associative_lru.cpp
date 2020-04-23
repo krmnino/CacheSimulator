@@ -3,6 +3,8 @@
 #include <vector>
 #include <math.h>
 
+#include "caches.h"
+
 void fully_associative_lru(std::ofstream& out_file, std::string file_name) {
 	std::ifstream infile(file_name);
 	std::string op;

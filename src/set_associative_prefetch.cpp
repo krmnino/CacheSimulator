@@ -3,6 +3,8 @@
 #include <vector>
 #include <math.h>
 
+#include "caches.h"
+
 void set_associative_prefetch(std::ofstream& out_file, std::string file_name) {
 	std::string op;
 	unsigned long long addr;
