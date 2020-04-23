@@ -16,4 +16,4 @@ $(OBJS): $(DEPS)
 	g++ -c $(CXXFLAGS) $(DEPS)
 
 clean:
-	rm *.o cache-sim
+	rm -f *.o cache-sim
